@@ -17,7 +17,7 @@ export default function ServicesPage() {
 
       <section className="section-space">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="mx-auto max-w-3xl mb-12">
+          <div className="max-w-3xl mb-10">
             <p className="eyebrow">More Than Just a Medical Store</p>
             <p className="mt-6 text-lg leading-8 text-[var(--ink-muted)]">
               From everyday medicines and first-aid essentials to baby care, personal care, pet food and veterinary products, Shree Ram Medical offers a broad range of everyday healthcare and wellness needs.
