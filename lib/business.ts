@@ -1,7 +1,7 @@
 const storeAddress = "Taluka-Miraj, Mahavir Chowk, Palavi Enterprises, Main Road, Post, Arag, Maharashtra 416401";
 
 export const business = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  siteUrl: "https://shreerammedical.com",
   name: "Shree Ram Medical",
   tagline: "Your trusted medical store in Arag",
   description:

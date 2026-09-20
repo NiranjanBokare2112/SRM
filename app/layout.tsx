@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description:
     "Visit Shree Ram Medical in Arag, Maharashtra for local healthcare and medical needs. Find our location, opening hours, contact details and directions.",
   openGraph: {
+    url: business.siteUrl,
     title: "Shree Ram Medical | Medical Store in Arag, Maharashtra",
     description:
       "Your local medical store in Arag. Find opening hours, contact details and directions.",

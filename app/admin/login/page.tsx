@@ -4,7 +4,9 @@ import { BrandLogo } from "@/components/brand/BrandLogo";
 import { LoginForm, type LoginMode } from "@/components/admin/LoginForm";
 
 export const metadata = {
-  title: "Owner Login | Shreeram Medical",
+  title: "Owner Login",
+  robots: { index: false, follow: false },
+  alternates: { canonical: "/admin/login" },
   description: "Private owner access for the Shreeram Medical management portal.",
 };
 

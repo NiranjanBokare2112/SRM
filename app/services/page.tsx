@@ -1,6 +1,19 @@
+import { business } from "@/lib/business";
 import { CategoryGrid, CTASection, SectionHeading, SiteShell, VisitStoreCTA } from "@/components/site";
 
-export const metadata = { title: "Healthcare Categories | Shree Ram Medical" };
+export const metadata = {
+  title: "Healthcare Categories",
+  description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shree Ram Medical in Arag.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: `Healthcare Categories | ${business.name}`,
+    description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shree Ram Medical in Arag.",
+    url: `${business.siteUrl}/services`,
+    type: "website",
+    locale: "en_IN",
+    siteName: business.name,
+  },
+};
 
 export default function ServicesPage() {
   return (

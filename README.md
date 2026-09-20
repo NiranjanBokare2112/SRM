@@ -196,13 +196,9 @@ Update business information there instead of duplicating contact details in rout
 
 [app/layout.tsx](app/layout.tsx) defines root metadata, the title template, description, Open Graph values, locale, canonical URL, and Geist font. It also emits Schema.org `Pharmacy` JSON-LD using the centralized business configuration.
 
-Page-specific metadata is defined in each route's `page.tsx` file. The site URL can be overridden with:
+Page-specific metadata is defined in each route's `page.tsx` file. The public site origin is `https://shreerammedical.com`, configured centrally in `lib/business.ts`. Sitemap, robots, canonical, Open Graph and structured-data URLs use this origin, including in local builds.
 
-```env
-NEXT_PUBLIC_SITE_URL=https://your-production-domain.example
-```
-
-The default value is `http://localhost:3000`.
+Each public page has its own canonical and Open Graph URL. The sitemap omits `lastmod` until reliable page content modification dates are maintained. The private owner login is marked `noindex`.
 
 ## Styling And Responsive Behavior
 
@@ -240,4 +236,4 @@ Then run the production server with:
 npm run start
 ```
 
-For a hosted deployment, configure `NEXT_PUBLIC_SITE_URL` to the public site origin so canonical metadata, Open Graph metadata, structured data, robots, and sitemap URLs use the production domain.
+After deploying, verify `/sitemap.xml` and `/robots.txt` on `https://shreerammedical.com` before submitting `sitemap.xml` in Google Search Console.
