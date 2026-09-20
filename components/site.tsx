@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { addressLines, business } from "@/lib/business";
+import { business } from "@/lib/business";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 
 const navItems = [
@@ -236,7 +236,7 @@ export function LocationCard() {
           <div className="mt-8 flex gap-4">
             <MapPin size={21} className="mt-1 shrink-0 text-[var(--green)]" />
             <address className="not-italic leading-7 text-[var(--ink-muted)]">
-              {addressLines.map((line) => <span className="block" key={line}>{line}</span>)}
+              ShreeRam medical, Mahavir Chowk, Palavi Enterprises, Main Road, Post- Arag, Taluka-Miraj, Maharashtra 416401
             </address>
           </div>
         </div>
