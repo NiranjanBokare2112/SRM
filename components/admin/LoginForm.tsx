@@ -3,7 +3,8 @@
 import { FormEvent, useState } from "react";
 import { ArrowRight, KeyRound, LockKeyhole, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { getSupabaseBrowserClient, isDemoMode } from "@/lib/supabase/browser";
+import { DEMO_EMAIL, DEMO_OPERATOR, DEMO_PASSWORD } from "@/lib/demo/client";
 
 export type LoginMode = "sign-in" | "forgot" | "reset";
 
@@ -57,7 +58,8 @@ export function LoginForm({ initialMode = "sign-in" }: { initialMode?: LoginMode
 
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
       if (signInError) throw signInError;
-      router.replace("/admin/dashboard");
+      const { data: role } = await supabase.rpc("my_role");
+      router.replace(role === "operator" ? "/admin/billing" : "/admin/dashboard");
       router.refresh();
     } catch {
       setError(mode === "sign-in" ? genericError : "Unable to complete that request. Please try again.");
@@ -78,14 +80,14 @@ export function LoginForm({ initialMode = "sign-in" }: { initialMode?: LoginMode
         </div>
         <p className="eyebrow">Private owner access</p>
         <h1 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[var(--brand-dark)]">
-          {isReset ? "Set a new password" : isForgot ? "Reset your password" : "Owner Login"}
+          {isReset ? "Set a new password" : isForgot ? "Reset your password" : "Sign in to billing"}
         </h1>
         <p className="mt-3 text-sm leading-6 text-[var(--ink-muted)]">
           {isReset
             ? "Choose a new secure password for your owner account."
             : isForgot
               ? "Enter your email and we will send secure recovery instructions."
-              : "Access the Shree Ram Medical management portal."}
+              : "Owners and counter operators sign in here."}
         </p>
       </div>
 
@@ -154,6 +156,17 @@ export function LoginForm({ initialMode = "sign-in" }: { initialMode?: LoginMode
         </button>
       </form>
 
+      {isDemoMode && isSignIn && (
+        <div className="admin-form-message mt-5">
+          <p className="font-semibold">Test logins (sample data)</p>
+          <p className="mt-1"><b>Owner:</b> {DEMO_EMAIL} / {DEMO_PASSWORD}<br /><b>Operator:</b> {DEMO_OPERATOR.email} / {DEMO_OPERATOR.password}<br />Staff PIN on bills: <b>1234</b></p>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+            <button type="button" className="admin-text-button" onClick={() => { setEmail(DEMO_EMAIL); setPassword(DEMO_PASSWORD); }}>Fill in owner login</button>
+            <button type="button" className="admin-text-button" onClick={() => { setEmail(DEMO_OPERATOR.email); setPassword(DEMO_OPERATOR.password); }}>Fill in operator login</button>
+          </div>
+        </div>
+      )}
+
       <div className="mt-6 text-center text-sm">
         {isSignIn && (
           <button type="button" className="admin-text-button" onClick={() => { clearFeedback(); setMode("forgot"); }}>
@@ -162,7 +175,7 @@ export function LoginForm({ initialMode = "sign-in" }: { initialMode?: LoginMode
         )}
         {(isForgot || isReset) && (
           <button type="button" className="admin-text-button" onClick={() => { clearFeedback(); setMode("sign-in"); }}>
-            Back to Owner Login
+            Back to sign in
           </button>
         )}
       </div>

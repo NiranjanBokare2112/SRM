@@ -1,13 +1,13 @@
 import { business } from "@/lib/business";
-import { CategoryGrid, CTASection, SectionHeading, SiteShell, VisitStoreCTA } from "@/components/site";
+import { CategoryGrid, CTASection, PrescriptionCTA, SectionHeading, SiteShell } from "@/components/site";
 
 export const metadata = {
   title: "Healthcare Categories",
-  description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shree Ram Medical in Arag.",
+  description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shreeram Medical in Arag.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: `Healthcare Categories | ${business.name}`,
-    description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shree Ram Medical in Arag.",
+    description: "Explore medicines, baby care, personal care, veterinary products and everyday healthcare essentials at Shreeram Medical in Arag.",
     url: `${business.siteUrl}/services`,
     type: "website",
     locale: "en_IN",
@@ -23,7 +23,7 @@ export default function ServicesPage() {
           <SectionHeading 
             eyebrow="Healthcare categories" 
             title="Medicines, healthcare essentials, baby care and more." 
-            text="Explore the diverse range of products available at Shree Ram Medical, from everyday medicines to personal care, veterinary products and beyond."
+            text="Explore the diverse range of products available at Shreeram Medical, from everyday medicines to personal care, veterinary products and beyond."
           />
         </div>
       </section>
@@ -33,14 +33,14 @@ export default function ServicesPage() {
           <div className="max-w-3xl mb-10">
             <p className="eyebrow">More Than Just a Medical Store</p>
             <p className="mt-6 text-lg leading-8 text-[var(--ink-muted)]">
-              From everyday medicines and first-aid essentials to baby care, personal care, pet food and veterinary products, Shree Ram Medical offers a broad range of everyday healthcare and wellness needs.
+              From everyday medicines and first-aid essentials to baby care, personal care, pet food and veterinary products, Shreeram Medical offers a broad range of everyday healthcare and wellness needs.
             </p>
           </div>
           <CategoryGrid />
         </div>
       </section>
 
-      <VisitStoreCTA />
+      <PrescriptionCTA />
       <CTASection />
     </SiteShell>
   );

@@ -11,14 +11,14 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: "Shree Ram Medical | Medical Store in Arag, Maharashtra",
+    default: "Shreeram Medical | Medical Store in Arag, Maharashtra",
     template: `%s | ${business.name}`,
   },
   description:
-    "Visit Shree Ram Medical in Arag, Maharashtra for local healthcare and medical needs. Find our location, opening hours, contact details and directions.",
+    "Visit Shreeram Medical in Arag, Maharashtra for local healthcare and medical needs. Find our location, opening hours, contact details and directions.",
   openGraph: {
     url: business.siteUrl,
-    title: "Shree Ram Medical | Medical Store in Arag, Maharashtra",
+    title: "Shreeram Medical | Medical Store in Arag, Maharashtra",
     description:
       "Your local medical store in Arag. Find opening hours, contact details and directions.",
     type: "website",

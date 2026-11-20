@@ -3,7 +3,7 @@ import { business } from "@/lib/business";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/" },
+    rules: { userAgent: "*", allow: "/", disallow: "/admin" },
     sitemap: `${business.siteUrl}/sitemap.xml`,
   };
 }

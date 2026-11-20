@@ -36,6 +36,30 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in a browser.
 
+## Owner Billing Portal (`/admin`)
+
+A private billing system for the store, replacing the daily screens of the old desktop software (Medisoft). Staff sign in at `/admin/login` (linked as "Staff login" in the site footer).
+
+- **Owner** logins see everything.
+- **Operator** (counter) logins see only the New Bill screen: billing, printing, returns (F7) and customer lookup. The database itself hides purchase costs and profit from them, and blocks owner-only actions.
+
+Portal-wide: Ctrl+K quick search, collapsible sidebar, light/dark/system theme, toast notifications, themed dropdowns and date pickers.
+
+| Screen | What it does |
+| --- | --- |
+| Dashboard | Sales, bills, average bill and profit vs the previous period; sales/profit by day (or hour), payment split, top medicines, busiest hours; stock and udhaar alerts. |
+| New Bill (`F2`) | Counter billing: search by name/salt or scan a barcode, earliest-expiry batch picked automatically, strips + loose tablets, substitutes with the same salt, customer lookup with udhaar due and "repeat last bill", discount, Cash/UPI/Card/Credit, staff PIN, save and print (`F10`), returns (`F7`), hold bills. |
+| Bills | Bill list by date range and payment mode; each bill opens in a panel with in-app A5/80mm preview, print and return; CSV download for the CA. |
+| Customers & Udhaar | Customers with credit balances, ledger, collect payments, WhatsApp reminder with the amount due. |
+| Sales Return | Return items against a bill; refund follows the bill discount, and stock goes back. |
+| Purchases | Enter supplier bills with batch, expiry, MRP, rate, free quantity and discount; stock is added on save. |
+| Medicines & Stock | Medicine master, live stock by batch, opening stock, and removing expired or damaged stock. |
+| Suppliers | Amount owed to each supplier, their ledger, and recording payments. |
+| Reports | Sales after returns, estimated profit, collection by mode, and a GST summary by rate (output vs input). |
+| Settings | Shop details printed on bills (GSTIN, D.L. No), printer size, staff PINs, operator logins. |
+
+With no database configured the portal runs in demo mode on sample data kept in the browser (test logins are shown on the login page). For a real database use either local PostgreSQL (`npm run db:setup`, see `.env.example`) or Supabase; setup steps are in [supabase/README.md](supabase/README.md). The database schema, security rules and billing functions are in [supabase/migrations](supabase/migrations).
+
 ## Available Scripts
 
 | Command | Purpose |
