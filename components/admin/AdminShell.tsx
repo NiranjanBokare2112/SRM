@@ -67,6 +67,30 @@ export function AdminShell({ children }: { children: ReactNode }) {
     return () => { cancelled = true; };
   }, [router]);
 
+  // Phone layout: tables become cards, so give each cell its column name as a label.
+  useEffect(() => {
+    if (state !== "ready") return;
+    const label = () => {
+      document.querySelectorAll<HTMLTableElement>(".adm-body table.adm-table").forEach((table) => {
+        const heads = Array.from(table.querySelectorAll(":scope > thead > tr > th")).map((th) => th.textContent?.trim() ?? "");
+        table.querySelectorAll(":scope > tbody > tr, :scope > tfoot > tr").forEach((tr) => {
+          let col = 0;
+          Array.from(tr.children).forEach((cell) => {
+            const span = (cell as HTMLTableCellElement).colSpan || 1;
+            const value = span > 1 ? "" : (heads[col] ?? "");
+            if (cell.getAttribute("data-label") !== value) cell.setAttribute("data-label", value);
+            col += span;
+          });
+        });
+      });
+    };
+    label();
+    let frame = 0;
+    const observer = new MutationObserver(() => { cancelAnimationFrame(frame); frame = requestAnimationFrame(label); });
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, [state]);
+
   useEffect(() => {
     if (state === "ready" && role === "operator" && !operatorAllowed(pathname)) router.replace("/admin/billing");
   }, [state, role, pathname, router]);

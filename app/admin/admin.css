@@ -208,3 +208,43 @@
   .adm-body input[type="checkbox"]:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(30,147,182,.3); }
   .adm-body input[type="checkbox"]:disabled { opacity: .5; cursor: not-allowed; }
 }
+
+
+/* ---------- Phones (< 640px) ---------- */
+@layer components {
+  .adm-popover { max-width: calc(100vw - 16px); }
+
+  /* Bottom action bar (New Bill) */
+  .adm-mobile-bar { position: fixed; inset: auto 0 0 0; z-index: 45; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid var(--line); background: var(--adm-surface); padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom)); box-shadow: 0 -8px 24px rgba(0,0,0,.08); }
+
+  @media (max-width: 639px) {
+    /* Tables become cards: the main column spans the card, the rest sit in two labelled columns. */
+    .adm-body .adm-table:not(.adm-keep) > thead { display: none; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem .9rem; padding: .8rem 1rem; border-bottom: 1px solid var(--line); }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr:hover { background: transparent; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td { display: block; min-width: 0; padding: 0; border: 0; text-align: left; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td.num { text-align: left; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td[data-label]:not([data-label=""])::before {
+      content: attr(data-label); display: block; margin-bottom: .1rem; color: var(--ink-muted); font-size: .64rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    /* Main column of each list: full width, no label. */
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td:is([data-label="Bill"], [data-label="Medicine"], [data-label="Customer"], [data-label="Supplier"], [data-label="Return"], [data-label="Entry"], [data-label="Name"], [data-label="Item"]) { grid-column: 1 / -1; font-size: .95rem; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td:is([data-label="Bill"], [data-label="Medicine"], [data-label="Customer"], [data-label="Supplier"], [data-label="Return"], [data-label="Entry"], [data-label="Name"], [data-label="Item"])::before { display: none !important; }
+    /* Row numbers and expand chevrons add nothing on a card. */
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td[data-label="#"],
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td:has(> svg:only-child) { display: none; }
+    /* Action buttons and expanded details take the full card width. */
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td[data-label=""] { grid-column: 1 / -1; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td[data-label=""] span.inline-flex { flex-wrap: wrap; }
+    .adm-body .adm-table:not(.adm-keep) > tbody > tr > td.text-right { text-align: left; }
+    .adm-body .adm-table:not(.adm-keep) > tfoot > tr { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; padding: .7rem 1rem; }
+    .adm-body .adm-table:not(.adm-keep) > tfoot > tr > td { padding: 0; border: 0; }
+    .adm-body .adm-table:not(.adm-keep) > tfoot > tr > td:empty { display: none; }
+    .adm-subrow { border-radius: .6rem; padding: .5rem !important; }
+
+    .adm-modal-backdrop { padding: 0; align-items: flex-end; }
+    .adm-modal, .adm-modal-wide { width: 100%; max-height: 92svh; overflow-y: auto; border-radius: 1rem 1rem 0 0; }
+    .adm-toasts { bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+  }
+}

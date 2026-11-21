@@ -104,16 +104,16 @@ export function Dashboard() {
           <h1 className="text-2xl font-semibold tracking-[-0.03em] sm:text-[1.7rem]">Dashboard</h1>
           <p className="mt-1 text-sm text-[var(--ink-muted)]">{new Intl.DateTimeFormat("en-IN", { dateStyle: "full", timeZone: "Asia/Kolkata" }).format(new Date())}</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/admin/billing" className="button button-dark"><ShoppingCart size={18} /> New Bill <span className="adm-kbd border-white/40 text-white/80">F2</span></Link>
+        <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
+          <Link href="/admin/billing" className="button button-dark"><ShoppingCart size={18} /> New Bill <span className="adm-kbd hidden border-white/40 text-white/80 sm:inline">F2</span></Link>
           <Link href="/admin/purchases/new" className="button button-light"><Truck size={18} /> Purchase</Link>
           <Link href="/admin/returns" className="button button-light"><RotateCcw size={18} /> Return</Link>
         </div>
       </div>
 
       {/* One filter row scopes every figure below it. */}
-      <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Date range">
-        {ranges.map((r) => <button key={r.key} className="adm-mode-btn flex-none px-4" aria-pressed={rangeKey === r.key} onClick={() => setRangeKey(r.key)}>{r.label}</button>)}
+      <div className="mb-5 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap" role="group" aria-label="Date range">
+        {ranges.map((r) => <button key={r.key} className="adm-mode-btn px-4 sm:flex-none" aria-pressed={rangeKey === r.key} onClick={() => setRangeKey(r.key)}>{r.label}</button>)}
       </div>
       <Alert error={error} />
 

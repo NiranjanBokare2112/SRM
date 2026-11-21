@@ -18,11 +18,19 @@ function usePopover() {
     if (!el) return;
     const r = el.getBoundingClientRect();
     const popH = popRef.current?.offsetHeight ?? 320;
+    const popW = popRef.current?.offsetWidth ?? 280;
     const above = r.bottom + popH + 8 > window.innerHeight && r.top - popH - 8 > 0;
-    setPos({ top: above ? r.top - popH - 6 : r.bottom + 6, left: r.left, width: r.width, above });
+    const left = Math.max(8, Math.min(r.left, window.innerWidth - popW - 8));
+    setPos({ top: above ? r.top - popH - 6 : r.bottom + 6, left, width: r.width, above });
   }, []);
 
-  useLayoutEffect(() => { if (open) place(); }, [open, place]);
+  useLayoutEffect(() => {
+    if (!open) return;
+    place();
+    // Measure again once the popover has its real size.
+    const frame = requestAnimationFrame(place);
+    return () => cancelAnimationFrame(frame);
+  }, [open, place]);
   useEffect(() => {
     if (!open) return;
     const onDown = (e: PointerEvent) => {
@@ -221,7 +229,7 @@ export function DateRangeField({ from, to, onChange, presets = defaultPresets, l
         <ChevronDown size={16} className="shrink-0 text-[var(--ink-muted)]" />
       </button>
       {open && (
-        <div ref={popRef} className="adm-popover flex flex-col gap-3 p-3 sm:flex-row" style={{ top: pos.top, left: Math.min(pos.left, typeof window !== "undefined" ? window.innerWidth - 470 : pos.left) }} role="dialog" aria-label="Choose date range">
+        <div ref={popRef} className="adm-popover flex flex-col gap-3 p-3 sm:flex-row" style={{ top: pos.top, left: pos.left }} role="dialog" aria-label="Choose date range">
           <ul className="min-w-[10rem] sm:border-r sm:border-[var(--line)] sm:pr-3">
             {presets.map((p) => {
               const isOn = current?.key === p.key;

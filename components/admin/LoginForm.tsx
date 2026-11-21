@@ -78,7 +78,7 @@ export function LoginForm({ initialMode = "sign-in" }: { initialMode?: LoginMode
         <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--brand-light-blue)] text-[var(--brand-blue)]">
           {isReset ? <KeyRound size={21} /> : isForgot ? <Mail size={21} /> : <LockKeyhole size={21} />}
         </div>
-        <p className="eyebrow">Private owner access</p>
+        <p className="eyebrow">Staff access</p>
         <h1 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[var(--brand-dark)]">
           {isReset ? "Set a new password" : isForgot ? "Reset your password" : "Sign in to billing"}
         </h1>

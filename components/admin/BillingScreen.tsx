@@ -236,14 +236,14 @@ export function BillingScreen() {
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_20rem]">
+    <div className={`grid gap-5 xl:grid-cols-[minmax(0,1fr)_20rem] ${lines.length > 0 ? "max-xl:pb-24" : ""}`}>
       <section className="min-w-0">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-2xl font-semibold tracking-[-0.03em]">New Bill</h1>
           <div className="flex flex-wrap items-center gap-3 text-xs text-[var(--ink-muted)]">
             <span className="hidden items-center gap-1 sm:inline-flex"><ScanBarcode size={14} /> Scanner ready</span>
-            <span><kbd className="adm-kbd">F10</kbd> save &amp; print</span>
-            <button className="button button-small button-light" onClick={() => setReturnOpen(true)}><RotateCcw size={14} /> Return <kbd className="adm-kbd">F7</kbd></button>
+            <span className="hidden sm:inline"><kbd className="adm-kbd">F10</kbd> save &amp; print</span>
+            <button className="button button-small button-light" onClick={() => setReturnOpen(true)}><RotateCcw size={14} /> Return <kbd className="adm-kbd hidden sm:inline">F7</kbd></button>
           </div>
         </div>
 
@@ -432,6 +432,15 @@ export function BillingScreen() {
         </div>
       </aside>
 
+      {lines.length > 0 && (
+        <div className="adm-mobile-bar xl:hidden">
+          <div className="min-w-0">
+            <p className="text-xs text-[var(--ink-muted)]">{lines.length} item{lines.length > 1 ? "s" : ""} · to collect</p>
+            <p className="text-xl font-bold tabular-nums text-[var(--brand-blue-deeper)]">{money(totals.net)}</p>
+          </div>
+          <button className="button button-dark" onClick={save} disabled={saving}><Printer size={17} /> {saving ? "Saving…" : "Save"}</button>
+        </div>
+      )}
       {subsFor && <SubstitutesModal original={subsFor.product} onClose={() => setSubsFor(null)} onPick={(pick) => applySubstitute(subsFor, pick)} />}
       {returnOpen && (
         <Modal title="Sales return" wide onClose={() => setReturnOpen(false)}>
